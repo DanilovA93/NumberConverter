@@ -29,29 +29,50 @@ public class Main {
     }
 
 
-    private static int userInputNumber(boolean tenDigitNumber){
-        int input;
+    private static void userInputNumber(boolean tenDigitNumber){
+        int userInput;
 
         print.typeYourNumber();
         while (true) {
-            input = scanner.nextInt();
+            userInput = scanner.nextInt();
 
-            if (tenDigitNumber && input >= -128 && input <= 127) {
+            if (tenDigitNumber && userInput >= -128 && userInput <= 127) {
+                System.out.println(fromTenToTwo(userInput));
+                break;
 
-
-            } else if (!tenDigitNumber && (input == 0 || input == 1)) {
+            } else if (!tenDigitNumber && (userInput == 0 || userInput == 1)) {
+                //todo
 
             } else print.typeMistake();
         }
     }
 
-    private static String fromTenToTwo(int userInput){
+    private static StringBuilder fromTenToTwo(int userInput){
         StringBuilder finalNumber = new StringBuilder();
 
         if (userInput > 0) {
-            finalNumber.append(0);
-        } else finalNumber.append(1);
+            return doPositive(userInput);
 
-        if (userInput % )
+        } else return finalNumber.append(1);
+    }
+
+    private static StringBuilder doPositive(int userInput) {
+        StringBuilder finalNumber = new StringBuilder("0");
+
+        for (int i = 64; i > 0; i/=2){
+
+            if (userInput >= i) {
+                userInput -= i;
+                finalNumber.append("1");
+            } else finalNumber.append("0");
+        }
+
+        return finalNumber;
+    }
+
+    private static StringBuilder doNegative(int userInput) {
+        StringBuilder finalNumber = new StringBuilder("1");
+
+        return null; //todo
     }
 }
